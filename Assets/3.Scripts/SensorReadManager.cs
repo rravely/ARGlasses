@@ -12,7 +12,7 @@ public class SensorReadManager : MonoBehaviour
 {
     public static SensorReadManager instance;
 
-    public SerialPort serial = new SerialPort("COM3", 115200);
+    public SerialPort serial = new SerialPort("COM7", 115200);
 
     public float fPtich = 0.0f;
     public float fRoll = 0.0f;
@@ -25,12 +25,6 @@ public class SensorReadManager : MonoBehaviour
     public static int iYawCompValue = 0;
     bool bYawDateCompDone = false;
 
-    //public Transform tran;
-
-    //Tweener rotTween;
-    //public GameObject default_Obj;
-
-    // Start is called before the first frame update
     void Start()
     {
         if (instance != null) Destroy(instance);
@@ -55,19 +49,6 @@ public class SensorReadManager : MonoBehaviour
         {
             Debug.Log(e);
         }
-        //if (tran != null)
-        //{
-        //    int a = b_iYaw - iYaw;
-        //    tran.transform.Rotate(0, iYaw, 0);
-        //    tran.transform.eulerAngles = new Vector3(0, iYaw, 0);
-        //    //tran.transform.rotation = new Quaternion(0, iRoll, 0, 1); //iPtich
-        //    b_iYaw = iYaw;
-        //}
-        //
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    default_Obj.transform.Rotate(0, -60, 0);
-        //}
     }
 
     void serialEvent(SerialPort myPort)
@@ -97,7 +78,6 @@ public class SensorReadManager : MonoBehaviour
                 bYawDateCompDone = true;
             }
 
-            // after YAW º¸Á¤ ÈÄ
             else
             {
                 iYaw = iYaw + Math.Abs(iYawCompValue);
@@ -111,6 +91,4 @@ public class SensorReadManager : MonoBehaviour
     {
         serial.Close();
     }
-
-    
 }

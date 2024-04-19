@@ -15,28 +15,38 @@ public class WebcamController : MonoBehaviour
     int camWidth;
     int camHeight;
 
+    bool isStart=false;
+
     private void Start()
     {
         if (instance != null) Destroy(instance);
         instance = this;
+    }
 
-        StartWebCam();
+    public void WebcamBtn()
+    {
+        if (!isStart)
+            StartWebCam();
+        else
+            QuitWebCam();
+
+        isStart = !isStart;
     }
 
     public void StartWebCam()
     {
         device = WebCamTexture.devices[0];
 
-        camWidth = (int)display.rectTransform.sizeDelta.x;
-        camHeight = (int)display.rectTransform.sizeDelta.y;
-        camTexture = new WebCamTexture(device.name, camWidth, camHeight);
+            camWidth = (int)display.rectTransform.sizeDelta.x;
+            camHeight = (int)display.rectTransform.sizeDelta.y;
+            camTexture = new WebCamTexture(device.name, camWidth, camHeight);
 
-        display.texture = camTexture;
-        camTexture.Play();
+            display.texture = camTexture;
+            camTexture.Play();
     }
 
     public void QuitWebCam()
     {
-        camTexture.Stop();
+            camTexture.Stop();
     }
 }
